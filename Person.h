@@ -3,8 +3,8 @@
 using namespace std;
 
 class Person {
-  string firstName;
-  string secondName;
+public:
+  string name;
 
   bool isFriend;
   bool isUsed;
