@@ -32,6 +32,17 @@ class Groups {
 public:
   vector<Group> groups;
 
+  Group &refGroup(string name) {
+    bool found = false;
+    for (Group &group : groups) {
+      if (group.name == name) {
+        found = true;
+        return group;
+      }
+    }
+    return groups[0];
+  }
+
   vector<string> groupsNames() {
     sortList();
     vector<string> names;

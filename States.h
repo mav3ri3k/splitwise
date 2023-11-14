@@ -118,6 +118,19 @@ public:
         return true;
       }
       return false;
+    } else if (state == states[3]) {
+      if (action == format(actionGroup[0])) {
+        Group &grp = groups.refGroup(action);
+        grp.addExpense();
+        return true;
+      } else if (action == format(actionGroup[1])) {
+
+        return true;
+      } else if (action == format(actionGroup[2])) {
+        Group &grp = groups.refGroup(action);
+        grp.viewExpenses();
+        return true;
+      }
     }
 
     return false;

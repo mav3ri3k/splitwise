@@ -21,6 +21,13 @@ public:
 
   Group(string name) { this->name = name; }
 
+  void viewExpenses() {
+    for (auto expense : expenses) {
+      cout << expense.description << endl;
+      ;
+    }
+  }
+
   bool add(Person person) {
     participants.push_front(person);
     return true;
@@ -57,12 +64,5 @@ public:
 
     Expense expense = Expense(cost, description, participants);
     expense.split.setCost();
-  }
-
-  void printExpenses() {
-    for (auto expense : expenses) {
-      cout << expense.description << endl;
-      ;
-    }
   }
 };
