@@ -17,7 +17,7 @@ class States {
 public:
   Groups groups;
 
-  vector<string> states = {"groups", "group"};
+  vector<string> states = {"splitwise", "group"};
   string state;
   string listItem;
 

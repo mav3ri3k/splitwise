@@ -80,6 +80,8 @@ int main() {
           cout << " - " << commands << endl;
         }
       }
+
+      cout << " - Exit" << endl;
       cout << endl;
     } else if (input == "exit") {
       cout << "Bye "
