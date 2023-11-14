@@ -5,7 +5,6 @@
 using namespace std;
 
 class States {
-  Groups groups;
 
   string format(string s) {
     for (int i = 0; i < s.length(); i++) {
@@ -16,27 +15,25 @@ class States {
   }
 
 public:
-  vector<string> states = {"groups", "group", "expense"};
+  Groups groups;
+
+  vector<string> states = {"groups", "group"};
   string state;
   string listItem;
 
-  vector<string> nextGroups = {states[0], states[3]};
-  vector<string> nextGroup = {states[2], states[4]};
-  vector<string> nextExpense = {states[3]};
+  vector<string> nextGroups = {states[1]};
+  vector<string> nextGroup = {states[0]};
 
   vector<string> actionGroups = {"Add", "Delete", "View"};
   vector<string> actionGroup = {"Add", "Delete", "View"};
-  vector<string> actionExpense = {"Add", "Delete", "View"};
 
   States() {
     state = states[0];
     groups = Groups();
   }
 
-  string currentState() { return state; }
-
   string stateName() {
-    if (state == states[3] || state == states[4]) {
+    if (state == states[1]) {
       return listItem;
     } else {
       return state;
@@ -46,20 +43,16 @@ public:
   vector<string> &nextViableStates() {
     if (state == states[0]) {
       return nextGroups;
-    } else if (state == states[1]) {
-      return nextGroup;
     } else {
-      return nextExpense;
+      return nextGroup;
     }
   }
 
   vector<string> &actionsAvailable() {
     if (state == states[0]) {
       return actionGroups;
-    } else if (state == states[1]) {
-      return actionGroup;
     } else {
-      return actionExpense;
+      return actionGroup;
     }
   }
 
@@ -83,6 +76,22 @@ public:
     action = format(action);
 
     if (state == states[0]) {
+      if (action == format(actionGroups[0])) {
+        try {
+          groups.addGroup();
+        } catch (int i) {
+          cout << "\uf256 Please choose a different name! " << endl;
+          return false;
+        }
+        return true;
+      } else if (action == format(actionGroups[1])) {
+
+        return true;
+      } else if (action == format(actionGroups[2])) {
+        groups.viewGroups();
+        return true;
+      }
+    } else if (state == states[1]) {
       if (action == format(actionGroup[0])) {
         Group &grp = groups.refGroup(action);
         grp.addExpense();
@@ -103,10 +112,10 @@ public:
   bool moveToList(string item) {
     item = format(item);
 
-    if (state == states[2]) {
+    if (state == states[0]) {
       bool present = false;
       for (string name : groups.groupsNames()) {
-        if (name == item) {
+        if (format(name) == item) {
           present = true;
         }
       }
@@ -114,14 +123,14 @@ public:
       if (!present) {
         return false;
       }
-      if (changeStateTo(states[3])) {
+      if (changeStateTo(states[1])) {
         listItem = item;
         return true;
       } else {
         return false;
       }
       return false;
-    } else if (state == states[3]) {
+    } else if (state == states[1]) {
       bool present = false;
       return true;
     }

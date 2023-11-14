@@ -1,8 +1,5 @@
 #include "Color.h"
 #include "States.h"
-#include <cctype>
-#include <cstdio>
-#include <cstring>
 #include <string>
 
 using namespace std;
@@ -43,9 +40,28 @@ int main() {
       cout << "Currently in " << red << format(states.stateName()) << def
            << " menue." << endl
            << endl;
-      cout << "Option available: " << endl;
-      for (string nextState : states.nextViableStates()) {
-        cout << " - " << format(nextState) << endl;
+
+      if (states.state == states.states[0]) {
+        if (!states.groups.groups.empty()) {
+          cout << "Groups available: " << endl;
+          for (Group grp : states.groups.groups) {
+            cout << " - " << format(grp.name) << endl;
+          }
+        } else {
+          cout << "Add New group to see list of Groups" << endl;
+        }
+      } else {
+        Group &grp = states.groups.refGroup(states.stateName());
+        if (!grp.expenses.empty()) {
+          cout << "Expense: " << endl;
+          for (Expense expense : grp.expenses) {
+            cout << " - "
+                 << "Rs." << expense.cost << " " << expense.description << endl;
+          }
+        } else {
+          cout << "You can add expense for " << red << grp.name << def
+               << " here" << endl;
+        }
       }
 
       if (!states.actionsAvailable().empty()) {

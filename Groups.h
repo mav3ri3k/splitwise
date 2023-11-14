@@ -1,6 +1,5 @@
 #include "Group.h"
 #include <algorithm>
-#include <cctype>
 #include <string>
 #include <vector>
 
@@ -20,7 +19,7 @@ class Groups {
     for (int i = 0; i < s.length(); i++) {
       s[i] = tolower(s[i]);
     }
-    s[0] = tolower(s[0]);
+    s[0] = toupper(s[0]);
 
     return s;
   }
@@ -57,6 +56,10 @@ public:
     string name;
     cout << "Name: ";
     cin >> name;
+
+    if (name == "group") {
+      throw 1;
+    }
     name = formatName(name);
 
     groups.push_back(Group(name));
