@@ -25,6 +25,8 @@ class Groups {
     return format(a.name) < format(b.name);
   }
 
+  void sortList() { sort(groups.begin(), groups.end(), comparator); }
+
 public:
   vector<Group> groups;
 
@@ -79,6 +81,4 @@ public:
       cout << "No Groups created yet" << endl;
     }
   }
-
-  void sortList() { sort(groups.begin(), groups.end(), comparator); }
 };

@@ -1,5 +1,6 @@
-#include "Split.h"
+#include "SplitPerson.h"
 #include <algorithm>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -59,6 +60,7 @@ public:
     this->description = des;
 
     cout << "Expense Added" << endl;
+    sortList();
   }
   void sortList() {
     sort(participants.begin(), participants.end(), comparator);
