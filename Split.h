@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <forward_list>
 #include <iostream>
-#include <pstl/glue_execution_defs.h>
 #include <string>
 
 using namespace std;
@@ -33,6 +32,7 @@ public:
   forward_list<SplitPerson> splitParticipants;
   forward_list<Person> participants;
 
+  Split() {}
   Split(forward_list<Person> &participants, float cost) {
     this->participants = participants;
     this->cost = cost;
@@ -63,7 +63,7 @@ public:
       for (auto person : splitParticipants) {
         person.personCost = 0;
       }
-      cout << "False";
+      cout << "Unsucessfull, please try again!";
     } else {
       cout << "Successfull";
     }

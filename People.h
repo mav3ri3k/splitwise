@@ -2,6 +2,9 @@
 
 using namespace std;
 
+#ifndef PEOPLE_H
+#define PEOPLE_H
+
 class People {
 public:
   virtual bool add(Person person) = 0;
@@ -9,3 +12,5 @@ public:
   virtual Person *retrieveName(string name) = 0;
   virtual void sortList() = 0;
 };
+
+#endif // PEOPLE_H

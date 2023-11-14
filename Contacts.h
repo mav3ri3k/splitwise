@@ -21,7 +21,7 @@ public:
   }
 
   bool remove(Person person) {
-    people.remove(person);
+    // people.remove(person);
     return true;
   }
 

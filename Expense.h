@@ -14,9 +14,19 @@ private:
 public:
   float cost;
   string description;
+  Split split;
   forward_list<Person> participants;
 
   bool isSorted;
+
+  Expense() {}
+  Expense(float cost, string description, forward_list<Person> &participants) {
+    this->cost = cost;
+    this->description = description;
+    this->participants = participants;
+
+    this->split = Split(participants, cost);
+  }
 
   bool add(Person person) {
     participants.push_front(person);
@@ -24,7 +34,7 @@ public:
   }
 
   bool remove(Person person) {
-    participants.remove(person);
+    // participants.remove(person);
     return true;
   }
 
