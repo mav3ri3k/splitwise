@@ -1,6 +1,7 @@
 #include "People.h"
 #include "Split.h"
 #include <algorithm>
+#include <cctype>
 #include <forward_list>
 #include <pstl/glue_execution_defs.h>
 #include <string>
@@ -12,6 +13,16 @@ class Expense {
 private:
   static bool comparator(const SplitPerson &a, const SplitPerson &b) {
     return a.name < b.name;
+  }
+
+  string format(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+
+    s[0] = toupper(s[0]);
+
+    return s;
   }
 
 public:
@@ -39,7 +50,7 @@ public:
         break;
       } else {
         float split;
-        cout << name << "'s split: Rs.";
+        cout << format(name) << "'s split: Rs.";
         cin >> split;
         totalCost += split;
 
@@ -49,6 +60,9 @@ public:
     string des;
     cout << "Expense description: ";
     cin >> des;
+    this->description = des;
+
+    cout << "Expense Added" << endl;
   }
   void sortList() {
     sort(participants.begin(), participants.end(), comparator);

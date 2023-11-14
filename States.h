@@ -25,7 +25,7 @@ public:
   vector<string> nextGroup = {states[0]};
 
   vector<string> actionGroups = {"Add", "Delete", "View"};
-  vector<string> actionGroup = {"Add", "Delete", "View"};
+  vector<string> actionGroup = {"Add", "View"};
 
   States() {
     state = states[0];
@@ -93,16 +93,16 @@ public:
       }
     } else if (state == states[1]) {
       if (action == format(actionGroup[0])) {
-        Group &grp = groups.refGroup(action);
+        Group &grp = groups.refGroup(listItem);
         grp.addExpense();
         return true;
       } else if (action == format(actionGroup[1])) {
+        Group &grp = groups.refGroup(listItem);
 
-        return true;
-      } else if (action == format(actionGroup[2])) {
-        Group &grp = groups.refGroup(action);
         grp.viewExpenses();
         return true;
+      } else {
+        return false;
       }
     }
 

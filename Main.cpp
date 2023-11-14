@@ -51,6 +51,8 @@ int main() {
           cout << "Add New group to see list of Groups" << endl;
         }
       } else {
+        cout << "Go back: " << endl;
+        cout << " - Groups" << endl << endl;
         Group &grp = states.groups.refGroup(states.stateName());
         if (!grp.expenses.empty()) {
           cout << "Expense: " << endl;
@@ -58,6 +60,12 @@ int main() {
             cout << " - "
                  << "Rs." << expense.totalCost << " " << expense.description
                  << endl;
+
+            cout << "   - You: Rs." << expense.myCost << endl;
+            for (SplitPerson person : expense.participants) {
+              cout << "   - " << format(person.name) << ": Rs."
+                   << person.personCost << endl;
+            }
           }
         } else {
           cout << "You can add expense for " << red << grp.name << def

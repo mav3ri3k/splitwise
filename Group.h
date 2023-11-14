@@ -1,4 +1,5 @@
 #include "Expense.h"
+#include <cctype>
 #include <forward_list>
 #include <vector>
 // delete later
@@ -12,6 +13,16 @@ class Group : public People {
 private:
   static bool comparator(const Person &a, const Person &b) {
     return a.name < b.name;
+  }
+
+  string format(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+
+    s[0] = toupper(s[0]);
+
+    return s;
   }
 
 public:
@@ -52,9 +63,22 @@ public:
   }
 
   void viewExpenses() {
-    for (auto expense : expenses) {
-      cout << expense.description << endl;
-      ;
+
+    if (!expenses.empty()) {
+      cout << "Expense: " << endl;
+      for (Expense expense : expenses) {
+        cout << " - "
+             << "Rs." << expense.totalCost << " " << expense.description
+             << endl;
+
+        cout << "   - You : Rs." << expense.myCost << endl;
+        for (SplitPerson person : expense.participants) {
+          cout << "   - " << format(person.name) << ": Rs." << person.personCost
+               << endl;
+        }
+      }
+    } else {
+      cout << "You can add expense for " << name << " here" << endl;
     }
   }
 };
