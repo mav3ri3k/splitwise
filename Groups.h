@@ -1,0 +1,73 @@
+#include "Group.h"
+#include <algorithm>
+#include <cctype>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Groups {
+
+  static string format(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+
+    return s;
+  }
+
+  string formatName(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+    s[0] = tolower(s[0]);
+
+    return s;
+  }
+
+  static bool comparator(const Group &a, const Group &b) {
+    return format(a.name) < format(b.name);
+  }
+
+public:
+  vector<Group> groups;
+
+  vector<string> groupsNames() {
+    sortList();
+    vector<string> names;
+    for (Group group : groups) {
+      names.push_back(group.name);
+    }
+
+    return names;
+  }
+
+  string addGroup() {
+    string name;
+    cout << "Name: ";
+    cin >> name;
+    name = formatName(name);
+
+    groups.push_back(Group(name));
+
+    cout << "New Group " << formatName(name) << " added" << endl;
+
+    return name;
+  }
+
+  void viewGroups() {
+    sortList();
+
+    if (!groups.empty()) {
+      cout << "Groups created: " << endl;
+      for (Group group : groups) {
+        cout << " - " << formatName(group.name);
+        cout << endl;
+      }
+    } else {
+      cout << "No Groups created yet" << endl;
+    }
+  }
+
+  void sortList() { sort(groups.begin(), groups.end(), comparator); }
+};
