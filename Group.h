@@ -59,7 +59,7 @@ public:
     expense.split.setCost();
   }
 
-  void printExpenses() {
+  void viewExpenses() {
     for (auto expense : expenses) {
       cout << expense.description << endl;
       ;
