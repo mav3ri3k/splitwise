@@ -1,5 +1,6 @@
 #include "People.h"
 #include "Split.h"
+#include <algorithm>
 #include <forward_list>
 #include <pstl/glue_execution_defs.h>
 #include <string>
@@ -9,7 +10,7 @@ using namespace std;
 
 class Expense {
 private:
-  static bool comparator(const Person &a, const Person &b) {
+  static bool comparator(const SplitPerson &a, const SplitPerson &b) {
     return a.name < b.name;
   }
 
@@ -49,7 +50,6 @@ public:
     cout << "Expense description: ";
     cin >> des;
   }
-
   void sortList() {
     sort(participants.begin(), participants.end(), comparator);
   }

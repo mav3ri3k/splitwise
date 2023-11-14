@@ -56,7 +56,8 @@ int main() {
           cout << "Expense: " << endl;
           for (Expense expense : grp.expenses) {
             cout << " - "
-                 << "Rs." << expense.cost << " " << expense.description << endl;
+                 << "Rs." << expense.totalCost << " " << expense.description
+                 << endl;
           }
         } else {
           cout << "You can add expense for " << red << grp.name << def
