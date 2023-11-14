@@ -29,6 +29,18 @@ int main() {
   Color::Modifier def(Color::FG_DEFAULT);
 
   States states = States();
+
+  cout << "Currently in " << red << format(states.stateName()) << def
+       << " menue." << endl
+       << endl;
+  cout << "Add New group to see list of Groups" << endl << endl;
+  cout << "Commands available: " << endl;
+
+  for (string commands : states.actionsAvailable()) {
+    cout << " - " << commands << endl;
+  }
+  cout << " - Exit" << endl;
+
   while (true) {
     cout << red << format(states.stateName()) << "> " << def;
 
