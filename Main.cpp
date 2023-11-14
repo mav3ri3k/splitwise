@@ -1,5 +1,4 @@
 #include "Color.h"
-#include "Contacts.h"
 #include "Group.h"
 #include "States.h"
 #include <cctype>
@@ -59,11 +58,13 @@ int main() {
       }
       cout << endl;
     } else if (input == "exit") {
-      cout << "Bye";
+      cout << "Bye "
+           << "\uf25b";
       exit(0);
     } else {
       if (states.changeStateTo(input)) {
-        cout << "State changes" << endl;
+        cout << "Moved to " << input << endl;
+      } else if (states.doAction(input)) {
       } else {
         cout << red << "Wrong Command!!" << def << endl;
       }
