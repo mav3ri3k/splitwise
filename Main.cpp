@@ -1,30 +1,72 @@
 #include "Color.h"
 #include "Contacts.h"
 #include "Group.h"
-#include "cli/cli.h"
+#include "States.h"
+#include <cctype>
+#include <cstdio>
+#include <cstring>
 #include <string>
 
 using namespace std;
+
+string format(string s) {
+  for (int i = 0; i < s.length(); i++) {
+    if (i == 0) {
+      s[i] = toupper(s[i]);
+    } else {
+      s[i] = tolower(s[i]);
+    }
+  }
+
+  return s;
+}
+
+string lower(string s) {
+  for (int i = 0; i < s.length(); i++) {
+    s[i] = tolower(s[i]);
+  }
+
+  return s;
+}
 
 int main() {
   Color::Modifier red(Color::FG_RED);
   Color::Modifier def(Color::FG_DEFAULT);
 
-  string states[3] = {"main", "contacts", "groups"};
-  string state = states[0];
-
+  States states = States();
   while (true) {
+    cout << red << format(states.state) << "> " << def;
 
-    cout << red << state << "> " << def;
-    string choice;
-    cin >> choice;
+    string input;
+    cin >> input;
+    input = lower(input);
 
-    if (choice == "contacts") {
-      state = states[1];
-    } else if (choice == "Gropus") {
-      state = states[2];
+    if (input == "help") {
+      cout << "Currently in " << red << format(states.state) << def << " menue."
+           << endl
+           << endl;
+      cout << "Option available: " << endl;
+      for (string nextState : states.nextViableStates()) {
+        cout << " - " << format(nextState) << endl;
+      }
+
+      if (!states.actionsAvailable().empty()) {
+        cout << endl;
+        cout << "Commands available: " << endl;
+        for (string commands : states.actionsAvailable()) {
+          cout << " - " << commands << endl;
+        }
+      }
+      cout << endl;
+    } else if (input == "exit") {
+      cout << "Bye";
+      exit(0);
     } else {
-      cout << "Wrong choice" << endl;
+      if (states.changeStateTo(input)) {
+        cout << "State changes" << endl;
+      } else {
+        cout << red << "Wrong Command!!" << def << endl;
+      }
     }
   }
 }
