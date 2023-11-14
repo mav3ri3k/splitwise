@@ -46,17 +46,9 @@ public:
   void sortList() { participants.sort(comparator); }
 
   void addExpense() {
-    cout << "Add Expense:" << endl;
-    cout << "Total Cost: ";
-    float cost;
-    cin >> cost;
-
-    cout << "Description: ";
-    string description;
-    cin >> description;
-
-    Expense expense = Expense(cost, description, participants);
-    expense.split.setCost();
+    Expense ex = Expense();
+    ex.addExpense();
+    expenses.push_back(ex);
   }
 
   void viewExpenses() {

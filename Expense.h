@@ -1,54 +1,56 @@
 #include "People.h"
 #include "Split.h"
 #include <forward_list>
+#include <pstl/glue_execution_defs.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-class Expense : public People {
+class Expense {
 private:
   static bool comparator(const Person &a, const Person &b) {
     return a.name < b.name;
   }
 
 public:
-  float cost;
+  float myCost;
+  float totalCost;
   string description;
-  Split split;
-  forward_list<Person> participants;
-
-  bool isSorted;
+  vector<SplitPerson> participants = {};
 
   Expense() {}
-  Expense(float cost, string description, forward_list<Person> &participants) {
-    this->cost = cost;
-    this->description = description;
-    this->participants = participants;
 
-    this->split = Split(participants, cost);
-  }
+  void addExpense() {
+    cout << "Add names of Participants and their cost: " << endl;
+    cout << "Your split: Rs.";
+    float myCost;
+    cin >> myCost;
+    this->myCost = myCost;
+    totalCost += myCost;
 
-  bool add(Person person) {
-    participants.push_front(person);
-    return true;
-  }
+    while (true) {
+      string name;
+      cout << "Name/n: ";
+      cin >> name;
 
-  bool remove(Person person) {
-    // participants.remove(person);
-    return true;
-  }
+      if (name == "n" || name == "N") {
+        break;
+      } else {
+        float split;
+        cout << name << "'s split: Rs.";
+        cin >> split;
+        totalCost += split;
 
-  Person *retrieveName(string name) {
-    forward_list<Person>::iterator itr = participants.begin();
-
-    while (itr != participants.end()) {
-      if (itr->name == name) {
-        return &(*itr);
+        participants.push_back(SplitPerson(name, split));
       }
     }
-
-    return nullptr;
+    string des;
+    cout << "Expense description: ";
+    cin >> des;
   }
 
-  void sortList() { participants.sort(comparator); }
+  void sortList() {
+    sort(participants.begin(), participants.end(), comparator);
+  }
 };
