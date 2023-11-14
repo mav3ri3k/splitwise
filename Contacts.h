@@ -1,4 +1,5 @@
 #include "People.h"
+#include <cctype>
 #include <forward_list>
 #include <iostream>
 #include <string>
@@ -7,8 +8,25 @@ using namespace std;
 
 class Contacts : public People {
 private:
+  static string format(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+
+    return s;
+  }
+
+  string formatName(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+    s[0] = toupper(s[0]);
+
+    return s;
+  }
+
   static bool comparator(const Person &a, const Person &b) {
-    return a.name < b.name;
+    return format(a.name) < format(b.name);
   }
 
   bool add(Person person) {
@@ -43,6 +61,7 @@ public:
 
     cout << "Name: ";
     cin >> name;
+    name = formatName(name);
 
     char c;
     cout << "Favourite(Y/n): ";
@@ -66,7 +85,7 @@ public:
         cout << " - " << person.name;
 
         if (person.isFriend) {
-          cout << "star";
+          cout << " \uf41e";
         }
         cout << endl;
       }
