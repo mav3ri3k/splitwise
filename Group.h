@@ -1,14 +1,10 @@
 #include "Expense.h"
-#include <cctype>
-#include <forward_list>
-#include <vector>
 // delete later
 #include <iostream>
-#include <string>
 
 using namespace std;
 
-class Group : public People {
+class Group {
 
 private:
   static bool comparator(const Person &a, const Person &b) {

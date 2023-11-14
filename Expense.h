@@ -1,9 +1,5 @@
-#include "People.h"
 #include "Split.h"
 #include <algorithm>
-#include <cctype>
-#include <forward_list>
-#include <pstl/glue_execution_defs.h>
 #include <string>
 #include <vector>
 

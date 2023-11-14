@@ -1,7 +1,5 @@
-#include "Contacts.h"
 #include "Groups.h"
-#include <string>
-#include <vector>
+
 using namespace std;
 
 class States {
