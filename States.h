@@ -1,8 +1,20 @@
+#include "Contacts.h"
+#include <cctype>
 #include <string>
 #include <vector>
 using namespace std;
 
 class States {
+  Contacts contacts;
+
+  string format(string s) {
+    for (int i = 0; i < s.length(); i++) {
+      s[i] = tolower(s[i]);
+    }
+
+    return s;
+  }
+
 public:
   vector<string> states = {"main", "contacts", "groups", "exactGroup"};
   string state;
@@ -13,12 +25,14 @@ public:
   vector<string> nextExactGroup = {states[2]};
 
   vector<string> actionMain = {};
-  vector<string> actionContacts = {"Add Contact", "Delete Contact",
-                                   "View Contacts"};
-  vector<string> actionGroups = {"Add Group", "Delete Group", "View Groups"};
+  vector<string> actionContacts = {"Add", "Delete", "View"};
+  vector<string> actionGroups = {"Add", "Delete", "View"};
   vector<string> actionExactGroup = {"None"};
 
-  States() { state = states[0]; }
+  States() {
+    state = states[0];
+    contacts = Contacts();
+  }
 
   string currentState() { return state; }
 
@@ -60,5 +74,24 @@ public:
     } else {
       return false;
     }
+  }
+
+  bool doAction(string action) {
+    action = format(action);
+
+    if (state == states[1]) {
+      if (action == format(actionContacts[0])) {
+        contacts.addPerson();
+        return true;
+      } else if (action == format(actionContacts[1])) {
+        return true;
+      } else if (action == format(actionContacts[2])) {
+        contacts.viewContacts();
+        return true;
+      }
+      return false;
+    }
+
+    return false;
   }
 };
