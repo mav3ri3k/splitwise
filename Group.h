@@ -3,6 +3,7 @@
 #include <vector>
 // delete later
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -14,8 +15,11 @@ private:
   }
 
 public:
+  string name;
   vector<Expense> expenses;
   forward_list<Person> participants;
+
+  Group(string name) { this->name = name; }
 
   bool add(Person person) {
     participants.push_front(person);
