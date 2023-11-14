@@ -1,5 +1,4 @@
 #include "Color.h"
-#include "Group.h"
 #include "States.h"
 #include <cctype>
 #include <cstdio>
@@ -34,15 +33,15 @@ int main() {
 
   States states = States();
   while (true) {
-    cout << red << format(states.state) << "> " << def;
+    cout << red << format(states.stateName()) << "> " << def;
 
     string input;
     cin >> input;
     input = lower(input);
 
     if (input == "help") {
-      cout << "Currently in " << red << format(states.state) << def << " menue."
-           << endl
+      cout << "Currently in " << red << format(states.stateName()) << def
+           << " menue." << endl
            << endl;
       cout << "Option available: " << endl;
       for (string nextState : states.nextViableStates()) {
@@ -63,8 +62,8 @@ int main() {
       exit(0);
     } else {
       if (states.changeStateTo(input)) {
-        cout << "Moved to " << input << endl;
       } else if (states.doAction(input)) {
+      } else if (states.moveToList(input)) {
       } else {
         cout << red << "Wrong Command!!" << def << endl;
       }
