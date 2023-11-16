@@ -34,12 +34,11 @@ public:
       cout << "Expense: " << endl;
       for (Expense expense : expenses) {
         cout << " - "
-             << "Rs." << expense.totalCost << " " << expense.description
-             << endl;
+             << "₹" << expense.totalCost << " " << expense.description << endl;
 
-        cout << "   - You : Rs." << expense.myCost << endl;
+        cout << "   - You : ₹" << expense.myCost << endl;
         for (SplitPerson person : expense.participants) {
-          cout << "   - " << format(person.name) << ": Rs." << person.personCost
+          cout << "   - " << format(person.name) << ": ₹" << person.personCost
                << endl;
         }
       }

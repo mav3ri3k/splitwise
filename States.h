@@ -22,7 +22,7 @@ public:
   vector<string> nextGroups = {states[1]};
   vector<string> nextGroup = {states[0]};
 
-  vector<string> actionGroups = {"Add", "Delete", "View"};
+  vector<string> actionGroups = {"Add", "View"};
   vector<string> actionGroup = {"Add", "View"};
 
   States() {
@@ -83,9 +83,6 @@ public:
         }
         return true;
       } else if (action == format(actionGroups[1])) {
-
-        return true;
-      } else if (action == format(actionGroups[2])) {
         groups.viewGroups();
         return true;
       }

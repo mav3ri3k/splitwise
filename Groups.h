@@ -52,9 +52,22 @@ public:
   }
 
   string addGroup() {
+
+    Color::Modifier red(Color::FG_RED);
+    Color::Modifier blue(Color::FG_BLUE);
+    Color::Modifier green(Color::FG_GREEN);
+    Color::Modifier black(Color::FG_BLACK);
+    Color::Modifier def(Color::FG_DEFAULT);
+    Color::Modifier bred(Color::BG_RED);
+    Color::Modifier bgreen(Color::BG_GREEN);
+    Color::Modifier bblue(Color::BG_BLUE);
+    Color::Modifier bdef(Color::BG_DEFAULT);
+
     string name;
-    cout << "Name: ";
+    cout << green << "Name" << def << " of group: ";
+    cout << blue;
     cin >> name;
+    cout << def;
 
     if (name == "group") {
       throw 1;
@@ -62,8 +75,13 @@ public:
     name = formatName(name);
 
     groups.push_back(Group(name));
-
-    cout << "New Group " << formatName(name) << " added" << endl;
+    cout << endl;
+    cout << bgreen << black << "New Group " << formatName(name) << " added!"
+         << bdef << def << endl
+         << endl;
+    cout << "Input name of group to view its expenses\n"
+            "Input add command for creating more groups"
+         << endl;
 
     return name;
   }

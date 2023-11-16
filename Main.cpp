@@ -1,4 +1,3 @@
-#include "Color.h"
 #include "States.h"
 #include <string>
 
@@ -27,11 +26,13 @@ string lower(string s) {
 int main() {
   Color::Modifier red(Color::FG_RED);
   Color::Modifier def(Color::FG_DEFAULT);
+  Color::Modifier blink(Color::BLINK);
+  Color::Modifier rblink(Color::RST_BLINK);
 
   States states = States();
 
   cout << "Currently in " << red << format(states.stateName()) << def
-       << " menue." << endl
+       << " menu." << endl
        << endl;
   cout << "Add New group to see list of Groups" << endl << endl;
   cout << "Commands available: " << endl;
@@ -96,15 +97,14 @@ int main() {
       cout << " - Exit" << endl;
       cout << endl;
     } else if (input == "exit") {
-      cout << "Bye "
-           << "\uf25b";
+      cout << "Thank You" << endl << "Good Bye!!";
       exit(0);
     } else {
       if (states.changeStateTo(input)) {
       } else if (states.doAction(input)) {
       } else if (states.moveToList(input)) {
       } else {
-        cout << red << "Wrong Command!!" << def << endl;
+        cout << red << blink << "Wrong Command!!" << def << rblink << endl;
       }
     }
   }

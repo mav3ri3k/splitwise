@@ -1,3 +1,4 @@
+#include "Color.h"
 #include "SplitPerson.h"
 #include <algorithm>
 #include <iostream>
@@ -31,35 +32,62 @@ public:
   Expense() {}
 
   void addExpense() {
-    cout << "Add names of Participants and their cost: " << endl;
-    cout << "Your split: Rs.";
+
+    Color::Modifier red(Color::FG_RED);
+    Color::Modifier black(Color::FG_BLACK);
+    Color::Modifier blue(Color::FG_BLUE);
+    Color::Modifier green(Color::FG_GREEN);
+    Color::Modifier def(Color::FG_DEFAULT);
+    Color::Modifier bred(Color::BG_RED);
+    Color::Modifier bgreen(Color::BG_GREEN);
+    Color::Modifier bblue(Color::BG_BLUE);
+    Color::Modifier bdef(Color::BG_DEFAULT);
+
+    cout << "Add" << green << " names" << def << " of members and their "
+         << green << "contribution" << def << endl
+         << endl;
+    cout << "Add your contribution: ₹" << blue;
     float myCost;
     cin >> myCost;
+    cout << def;
     this->myCost = myCost;
     totalCost += myCost;
 
+    cout << endl;
+    cout << "Input " << bred << "[n] to stop" << bdef << " adding member"
+         << endl
+         << endl;
     while (true) {
       string name;
-      cout << "Name/n: ";
+      cout << "Name of member: " << blue;
       cin >> name;
+      cout << def;
 
       if (name == "n" || name == "N") {
         break;
       } else {
         float split;
-        cout << format(name) << "'s split: Rs.";
+        cout << blue << format(name) << "'s" << def << " contribution: ₹"
+             << blue;
         cin >> split;
+        cout << def;
         totalCost += split;
 
         participants.push_back(SplitPerson(name, split));
       }
     }
+    cout << "\nAdd " << green << "expense" << def << " description: " << blue;
     string des;
-    cout << "Expense description: ";
-    cin >> des;
-    this->description = des;
+    getchar(); // idk what hidden input is there ????
+    getline(cin, this->description);
+    cout << def;
 
-    cout << "Expense Added" << endl;
+    cout << bgreen << black << endl
+         << "Expense Added" << bdef << def << endl
+         << endl;
+    cout << "Input View to see all expense summaries" << endl;
+    cout << "Input Add command for adding more expenses" << endl;
+
     sortList();
   }
   void sortList() {
