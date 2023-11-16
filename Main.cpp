@@ -1,3 +1,4 @@
+#include "Help.h"
 #include "States.h"
 #include <string>
 
@@ -26,21 +27,20 @@ string lower(string s) {
 int main() {
   Color::Modifier red(Color::FG_RED);
   Color::Modifier def(Color::FG_DEFAULT);
+  Color::Modifier bred(Color::BG_RED);
+  Color::Modifier bdef(Color::BG_DEFAULT);
   Color::Modifier blink(Color::BLINK);
   Color::Modifier rblink(Color::RST_BLINK);
 
+  Help h;
   States states = States();
-
+  cout << h.main << endl;
   cout << "Currently in " << red << format(states.stateName()) << def
        << " menu." << endl
        << endl;
-  cout << "Add New group to see list of Groups" << endl << endl;
-  cout << "Commands available: " << endl;
 
-  for (string commands : states.actionsAvailable()) {
-    cout << " - " << commands << endl;
-  }
-  cout << " - Exit" << endl;
+  cout << "Commands available: " << endl;
+  cout << h.cmdGroups << endl;
 
   while (true) {
     cout << red << format(states.stateName()) << "> " << def;
@@ -61,41 +61,43 @@ int main() {
             cout << " - " << format(grp.name) << endl;
           }
         } else {
-          cout << "Add New group to see list of Groups" << endl;
+          cout << "You can add groups for managing expenses" << endl;
         }
       } else {
         cout << "Go back: " << endl;
         cout << " - Groups" << endl << endl;
+
         Group &grp = states.groups.refGroup(states.stateName());
         if (!grp.expenses.empty()) {
           cout << "Expense: " << endl;
           for (Expense expense : grp.expenses) {
             cout << " - "
-                 << "Rs." << expense.totalCost << " " << expense.description
+                 << "₹" << expense.totalCost << " " << expense.description
                  << endl;
 
-            cout << "   - You: Rs." << expense.myCost << endl;
+            cout << "   - You: ₹" << expense.myCost << endl;
             for (SplitPerson person : expense.participants) {
-              cout << "   - " << format(person.name) << ": Rs."
+              cout << "   - " << format(person.name) << ": ₹"
                    << person.personCost << endl;
             }
           }
         } else {
-          cout << "You can add expense for " << red << grp.name << def
-               << " here" << endl;
+          cout << "Manage " << red << grp.name << def << " expense here"
+               << endl;
+          ;
         }
       }
 
-      if (!states.actionsAvailable().empty()) {
+      if (states.state == states.states[0]) {
         cout << endl;
         cout << "Commands available: " << endl;
-        for (string commands : states.actionsAvailable()) {
-          cout << " - " << commands << endl;
-        }
+        cout << h.cmdGroups << endl;
+      } else {
+        cout << endl;
+        cout << "Commands available: " << endl;
+        cout << h.cmdGroup << endl;
       }
 
-      cout << " - Exit" << endl;
-      cout << endl;
     } else if (input == "exit") {
       cout << "Thank You" << endl << "Good Bye!!";
       exit(0);
@@ -103,8 +105,14 @@ int main() {
       if (states.changeStateTo(input)) {
       } else if (states.doAction(input)) {
       } else if (states.moveToList(input)) {
+        cout << h.firstGroup;
+
+        cout << endl;
+        cout << "Commands available: " << endl;
+        cout << h.cmdGroups << endl;
       } else {
-        cout << red << blink << "Wrong Command!!" << def << rblink << endl;
+
+        cout << bred << blink << "Wrong Command!!" << bdef << rblink << endl;
       }
     }
   }

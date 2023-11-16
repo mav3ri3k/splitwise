@@ -82,8 +82,8 @@ public:
     getline(cin, this->description);
     cout << def;
 
-    cout << bgreen << black << endl
-         << "Expense Added" << bdef << def << endl
+    cout << endl
+         << bgreen << black << "Expense Added" << bdef << def << endl
          << endl;
     cout << "Input View to see all expense summaries" << endl;
     cout << "Input Add command for adding more expenses" << endl;

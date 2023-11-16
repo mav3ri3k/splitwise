@@ -43,7 +43,7 @@ public:
         }
       }
     } else {
-      cout << "You can add expense for " << name << " here" << endl;
+      cout << "Add expenses for " << name << " to see summary here" << endl;
     }
   }
 };
