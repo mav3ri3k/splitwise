@@ -109,7 +109,7 @@ int main() {
 
         cout << endl;
         cout << "Commands available: " << endl;
-        cout << h.cmdGroups << endl;
+        cout << h.cmdGroup << endl;
       } else {
 
         cout << bred << blink << "Wrong Command!!" << bdef << rblink << endl;
