@@ -72,12 +72,12 @@ int main() {
           cout << "Expense: " << endl;
           for (Expense expense : grp.expenses) {
             cout << " - "
-                 << "₹" << expense.totalCost << " " << expense.description
+                 << "Rs " << expense.totalCost << " " << expense.description
                  << endl;
 
-            cout << "   - You: ₹" << expense.myCost << endl;
+            cout << "   - You: Rs " << expense.myCost << endl;
             for (SplitPerson person : expense.participants) {
-              cout << "   - " << format(person.name) << ": ₹"
+              cout << "   - " << format(person.name) << ": Rs "
                    << person.personCost << endl;
             }
           }

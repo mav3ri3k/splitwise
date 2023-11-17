@@ -46,7 +46,7 @@ public:
     cout << "Add" << green << " names" << def << " of members and their "
          << green << "contribution" << def << endl
          << endl;
-    cout << "Add your contribution: ₹" << blue;
+    cout << "Add your contribution: Rs " << blue;
     float myCost;
     cin >> myCost;
     cout << def;
@@ -54,7 +54,7 @@ public:
     totalCost += myCost;
 
     cout << endl;
-    cout << "Input " << bred << "[n] to stop" << bdef << " adding member"
+    cout << "Input " << bred << "'n' to stop" << bdef << " adding member"
          << endl
          << endl;
     while (true) {
@@ -68,7 +68,7 @@ public:
         break;
       } else {
         float split;
-        cout << blue << format(name) << "'s" << def << " contribution: ₹"
+        cout << blue << format(name) << "'s" << def << " contribution: Rs "
              << blue;
         cin >> split;
         cout << def;
@@ -79,7 +79,6 @@ public:
     }
     cout << "\nAdd " << green << "expense" << def << " description: " << blue;
     string des;
-    getchar(); // idk what hidden input is there ????
     getline(cin, this->description);
     cout << def;
 
