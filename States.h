@@ -125,11 +125,7 @@ public:
         return false;
       }
       return false;
-    } else if (state == states[1]) {
-      bool present = false;
-      return true;
     }
-
     return false;
   }
 };
