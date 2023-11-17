@@ -16,5 +16,6 @@ public:
   string firstGroup = "Manage group expense here\n";
   string cmdGroup = " - Add: Make new expense\n"
                     " - View: List expenses\n"
+                    " - Splitwise: Go back to main menu\n"
                     " - Exit: Leave the application\n";
 };
