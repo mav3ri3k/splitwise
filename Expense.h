@@ -60,7 +60,8 @@ public:
     while (true) {
       string name;
       cout << "Name of member: " << blue;
-      cin >> name;
+      getchar(); // idk what hidden input is there ????
+      getline(cin, name);
       cout << def;
 
       if (name == "n" || name == "N") {
