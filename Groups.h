@@ -33,7 +33,7 @@ public:
   Group &refGroup(string name) {
     bool found = false;
     for (Group &group : groups) {
-      if (group.name == name) {
+      if (format(group.name) == format(name)) {
         found = true;
         return group;
       }
